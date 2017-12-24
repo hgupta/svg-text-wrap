@@ -1,0 +1,15 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 7
+  },
+  "extends": ["prettier", "eslint:recommended"],
+  "plugins": ["prettier", "compat"],
+  "env": {
+    "node": false,
+    "browser": true
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "compat/compat": "error"
+  }
+}

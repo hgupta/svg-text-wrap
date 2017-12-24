@@ -1,0 +1,24 @@
+{
+  "name": "svg-text-wrap",
+  "version": "1.0.0",
+  "description": "SVG Text Wrapping of long labels like Neo4j",
+  "main": "index.js",
+  "repository": "https://github.com/hgupta/svg-text-wrap.git",
+  "author": "Harsh Gupta <1045588+hgupta@users.noreply.github.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "echo 'No test available'",
+    "serve": "live-server --no-browser"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserslist": "^2.10.0",
+    "eslint": "^4.11.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-compat": "^2.1.0",
+    "eslint-plugin-prettier": "^2.4.0",
+    "live-server": "^1.2.0",
+    "prettier": "^1.9.2"
+  }
+}

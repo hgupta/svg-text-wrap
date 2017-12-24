@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SVG Text Wrap inside Circle like Neo4j</title>
+  <link rel="stylesheet" href="./bootstrap.min.css">
+  <style>
+    /*div.container { padding-top: 15px; }*/
+    .workspace { height: 90vh }
+  </style>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          SVG Text Wrap inside Circle like Neo4j
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="workspace col-lg-12">
+      </div>
+    </div>
+  </div>
+  <script src="./d3.min.js"></script>
+  <script src="../index.js"></script>
+  <script src="./labels.js"></script>
+  <script>
+    var onload = function() {
+      const workspace = d3.select('.workspace')
+      const svg = workspace.append('svg')
+      const gLayer = svg.append('svg:g').classed('g-layer', true)
+
+      const width = parseInt(workspace.style('width'))
+      const height = parseInt(workspace.style('height'))
+      const margin = { top: 10, left: 10, bottom: 10, right: 10 }
+      const gWidth = width - (margin.left + margin.right)
+      const gHeight = height - (margin.top + margin.bottom)
+
+      svg
+        .attr('width', width)
+        .attr('height', height)
+
+      gLayer
+        .attr('width', gWidth)
+        .attr('height', gHeight)
+        .attr('transform', 'translate(' + [margin.left, margin.top] + ')')
+
+      const settings = {
+        radius: 40,
+        lineHeight: 12,
+        fontSize: 10,
+        fontName: 'sans-serif'
+      }
+      const data = window.labels
+        .map(d => ({ labels: window.SVGTextWrap(d, settings) }))
+
+      const color = d3.scaleOrdinal(d3.schemeCategory20)
+
+      const simulation = d3.forceSimulation()
+        .force('link', d3.forceLink().id(d => d.index ))
+        .force('collide', d3.forceCollide(28).iterations(16))
+        .force('charge', d3.forceManyBody())
+        .force('center', d3.forceCenter(width / 2, height / 2))
+
+      const node = gLayer.selectAll('.node')
+        .data(data)
+        .enter().append('svg:g')
+        .attr('class', 'node')
+        .call(d3.drag()
+          .on('start', dragstarted)
+          .on('drag', dragged)
+          .on('end', dragended))
+
+      node.append('circle')
+        .attr('r', settings.radius)
+        .attr('fill', d => color(~~(Math.random() * (1 + 20 - 1) + 1)))
+
+      node
+        .selectAll('.nodeLabel')
+        .data(d => d.labels)
+        .enter()
+        .append('svg:text')
+        .attr('dx', 0)
+        .attr('dy', d => d.rule)
+        .classed('nodeLabel', true)
+        .style('font-size', `${settings.fontSize}px`)
+        .style('font-family', `${settings.fontName}`)
+        .style('font-weight', 'normal')
+        .style('text-anchor', 'middle')
+        .style('vertical-align', 'middle')
+        .style('pointer-events', 'none')
+        .style('text-transform', 'capitalize')
+        .text(d => d.text)
+
+      simulation
+        .nodes(data)
+        .on('tick', ticked)
+
+      function ticked() {
+        node.attr('transform', d => ['translate(', d.x, ',', d.y, ')'].join(''))
+      }
+
+      function dragstarted(d) {
+        if (!d3.event.active) simulation.alphaTarget(0.3).restart()
+        d.fx = d.x
+        d.fy = d.y
+      }
+
+      function dragged(d) {
+        d.fx = d3.event.x
+        d.fy = d3.event.y
+      }
+
+      function dragended(d) {
+        if (!d3.event.active) simulation.alphaTarget(0)
+        d.fx = null
+        d.fy = null
+      }
+    }
+    document.onload = onload
+  </script>
+</body>
+</html>
