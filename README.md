@@ -1,5 +1,5 @@
 # SVG Text Wrap like Neo4j
-SVG Text Wrapping of long labels like Neo4j. Currently only for circles.
+SVG Text Wrapping of long labels inside SVG figures like Neo4j. Currently only for circles.
 
 ### [**Codepen Demo**][codepen]
 
@@ -11,7 +11,7 @@ An example is also added to the project.
 
 You can add more labels to test by modifying the `labels.js` file in the `example` directory.
 
-![](https://raw.githubusercontent.com/hgupta/svg-text-wrap/master/example/example.png)
+![example png](https://raw.githubusercontent.com/hgupta/svg-text-wrap/master/example/example.png)
 
 # TODO
 - Support rectangles / squares
