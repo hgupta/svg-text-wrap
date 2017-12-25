@@ -13,7 +13,7 @@ You can add more labels to test by modifying the `labels.js` file in the `exampl
 
 ![example png](https://raw.githubusercontent.com/hgupta/svg-text-wrap/master/example/example.png)
 
-# TODO
+## TODO
 - Support rectangles / squares
 - Support triangles
 
