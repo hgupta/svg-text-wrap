@@ -129,4 +129,4 @@
     }
     context[name] = main
   }
-})(window || new Error('Browser not detected'), 'SVGTextWrap')
+})(window || new Error('[SVGTextWrap] Browser not detected'), 'SVGTextWrap')

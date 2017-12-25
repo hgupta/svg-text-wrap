@@ -14,4 +14,4 @@
     'Banking Business Financial Managementtttttttt',
     'IBM'
   ]
-})(window || new Error('Browser not detected'), 'labels')
+})(window || new Error('[SVGTextWrap] Browser not detected'), 'labels')

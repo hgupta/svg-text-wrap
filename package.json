@@ -9,10 +9,14 @@
   "private": false,
   "scripts": {
     "test": "echo 'No test available'",
-    "serve": "live-server --no-browser"
+    "serve": "live-server --no-browser",
+    "babel": "babel index.js -o svg-text-wrap.min.js"
   },
   "dependencies": {},
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-minify": "^0.2.0",
     "browserslist": "^2.10.0",
     "eslint": "^4.11.0",
     "eslint-config-prettier": "^2.9.0",
