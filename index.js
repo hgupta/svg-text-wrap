@@ -7,6 +7,17 @@
 
 'use strict'
 ;((context, name) => {
+  if (
+    !(
+      context.document &&
+      context.location &&
+      context.alert &&
+      context.setInterval
+    )
+  ) {
+    throw new Error('[SVGTextWrap] Browser not detected')
+  }
+
   const CONTINUATOR = '\u2026'
 
   const getCanvasContext = (fontSize, fontName) => {
@@ -129,4 +140,4 @@
     }
     context[name] = main
   }
-})(window || new Error('[SVGTextWrap] Browser not detected'), 'SVGTextWrap')
+})(window, 'SVGTextWrap')

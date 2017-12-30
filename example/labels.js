@@ -7,6 +7,17 @@
 
 'use strict'
 ;((context, name) => {
+  if (
+    !(
+      context.document &&
+      context.location &&
+      context.alert &&
+      context.setInterval
+    )
+  ) {
+    throw new Error('[SVGTextWrap] Browser not detected')
+  }
+
   context[name] = [
     'University of Pennsylvania',
     'International Business Machine',
@@ -14,4 +25,4 @@
     'Banking Business Financial Managementtttttttt',
     'IBM'
   ]
-})(window || new Error('[SVGTextWrap] Browser not detected'), 'labels')
+})(window, 'labels')
